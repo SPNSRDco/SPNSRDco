@@ -4,8 +4,10 @@ const app = express();
 const path = require('path')
 const bodyParser = require('body-parser');
 
+const config = require('./config.json');
+
 const phpExpress = require('php-express')({
-    binPath: path.join(__dirname, 'php/php.exe')
+    binPath: config.pathtoPHP
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,6 +22,6 @@ app.get('/', (req, res) => {
 });
 
 //Listen to requests on port 3000
-app.listen(3000, () => {
-    console.log('Listening on port 3000');
+app.listen(config.port, () => {
+    console.log(`Listening on port ${config.port}`);
 });
