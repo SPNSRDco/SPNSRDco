@@ -1,4 +1,4 @@
 {
-    "pathtoPHP": "T:/Libaries/Code/Web^ dev/spnsrd/SPNSRDco/php/php.exe",
+    "pathtoPHP": "\"T:\\Libaries\\Code\\php\\php_8.x\\php\\php.exe\"",
     "port" : 3000
 }

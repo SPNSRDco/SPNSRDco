@@ -24,4 +24,5 @@ app.get('/', (req, res) => {
 //Listen to requests on port 3000
 app.listen(config.port, () => {
     console.log(`Listening on port ${config.port}`);
+    console.log(config.pathtoPHP)
 });
