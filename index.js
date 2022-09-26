@@ -21,8 +21,11 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+app.get('/web/logo', (req, res) => {
+    res.sendFile(path.join(__dirname + '/web/logo.png'));
+})
+
 //Listen to requests on port 3000
 app.listen(config.port, () => {
     console.log(`Listening on port ${config.port}`);
-    console.log(config.pathtoPHP)
 });
