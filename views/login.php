@@ -67,7 +67,7 @@
         <div id="navbar">
             <div id="header">
                 <a id="logo" href="index.php">
-                    <img id="logo" src="web/logo" alt="SPNSRD Logo">
+                    <img id="logo" src="media.php?image=logo.png" alt="SPNSRD Logo">
                 </a>
             </div>       
             <br>
@@ -78,12 +78,7 @@
         </div>
         <br>
         <div class="center" id="login">
-            <form action="loginScript.php" method="post">
-                <?php if (isset($_GET['error'])) { ?>
-
-                <p class="error"><?php echo $_GET['error']; ?></p>
-
-                <?php } ?>
+        <form action="loginScript.php" method="post">
                 <input class="center" type="text" name="username" placeholder="Username" required>
                 <br>
                 <input class="center" type="password" name="password" placeholder="Password" required>

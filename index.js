@@ -10,9 +10,6 @@ const {uuidv4} = require('uuid');
 
 const config = require('./config.json');
 
-const phpExpress = require('php-express')({
-    binPath: config.pathtoPHP
-});
 
 function generateSalt() {
     //Generate a random salt to hash passwords with
@@ -29,14 +26,20 @@ const hashMyPassword = (password, salt) => {
     }
 }
 
-console.log(hashMyPassword('password', generateSalt()));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('views', './views');
-app.engine('php', phpExpress.engine);
-app.set('view engine', 'php');
 
-app.all(/.+\.php$/, phpExpress.router);
+app.post('/hasher', (req, res) => {
+    //Hash the password and send it back to the client
+    if (req.headers.host.startsWith('localhost')) {
+        let salt = generateSalt();
+        let hashed = hashMyPassword(req.body.password, salt);
+        res.send(hashed);
+    } 
+    else {
+        res.sendStatus(403);
+    }
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
