@@ -23,7 +23,6 @@ function checkPassword($pwd, &$errors) {
     return ($errors == $errors_init);
 }
 
-#var_dump($_POST);
 $backButton = "<br><button onclick='window.history.back()'>Back </button>";
 
 if ((isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["email"])) && !(empty($_POST["username"]) && empty($_POST["password"]) && empty($_POST["email"]))) {
