@@ -7,7 +7,6 @@
     $query->bindValue(1, session_id());
     $result = $query->execute();
     $result = $result->fetchArray();
-    $notLoggedin = $result == null;
     if ($result == null) {
         header("Location: login.php");
         echo "not logged in";
@@ -124,7 +123,7 @@
         <div class="center" id="profile">
             <div id="aboutsection">
                 <?php
-                if (!$notLoggedin) {
+                if ($result != null) {
                     $url = "https://www.googleapis.com/youtube/v3/channels?part=snippet&fields=items%2Fsnippet%2Fthumbnails%2Fdefault&id=". $result . "&key=AIzaSyDMC36lGNcf0RfIGYpqtdYxDZOufdPD0XE";
                     echo "<img id=\"pfp\" alt=\"Profile Picture\"><script>
 \nvar xhr = new XMLHttpRequest();
@@ -141,9 +140,13 @@
             <div id="stats">
                 <h3>Stats</h3>
                 <p>Subscribers: <?php
+                if ($result != null) { 
                 $api_response = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$result.'&fields=items/statistics/subscriberCount&key='.$APIkey);
                 $api_response_decoded = json_decode($api_response, true);
-                echo $api_response_decoded['items'][0]['statistics']['subscriberCount'];?></p>
+                echo $api_response_decoded['items'][0]['statistics']['subscriberCount'];
+                }
+                ?>
+                </p>
             </div>
             <br>
             <br>
