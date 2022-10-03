@@ -67,7 +67,7 @@ if ((isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["ema
         $db->busyTimeout(1000);
         $query = $db->prepare("INSERT INTO users (UserID, Username, Email, Password) VALUES (?, ?, ?, ?)");
         $query->bindValue(1, $tempUserID);
-        $query->bindValue(2, $_POST["username"]);
+        $query->bindValue(2, strtolower($_POST["username"]));
         $query->bindValue(3, $_POST["email"]);
         $query->bindValue(4, password_hash($_POST["password"], PASSWORD_DEFAULT));
         $result = $query->execute();
