@@ -7,6 +7,7 @@
     $query->bindValue(1, session_id());
     $result = $query->execute();
     $result = $result->fetchArray();
+    $notLoggedin = $result == null;
     if ($result == null) {
         header("Location: login.php");
         echo "not logged in";
@@ -123,7 +124,7 @@
         <div class="center" id="profile">
             <div id="aboutsection">
                 <?php
-                if (!$result == null) {
+                if (!$notLoggedin) {
                     $url = "https://www.googleapis.com/youtube/v3/channels?part=snippet&fields=items%2Fsnippet%2Fthumbnails%2Fdefault&id=". $result . "&key=AIzaSyDMC36lGNcf0RfIGYpqtdYxDZOufdPD0XE";
                     echo "<img id=\"pfp\" alt=\"Profile Picture\"><script>
 \nvar xhr = new XMLHttpRequest();
