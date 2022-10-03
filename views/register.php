@@ -33,7 +33,7 @@
                 width: 15vw;
                 background-color: #fff;
                 padding: 1vw;
-                height: 10vh;
+                height: 14vh;
                 padding-top: 3vh;
                 padding-bottom: 3vh;
                 align-items: center;
@@ -61,6 +61,13 @@
                 margin: 1vw;
                 display: flex;
             }
+            #passwordnote {
+                width: 15vw;
+                background-color: #fff;
+                padding: 1vw;
+                align-items: center;
+                border-radius: 25px;
+            }
         </style>
     </head>
     <body>
@@ -78,15 +85,28 @@
         </div>
         <br>
         <div class="center" id="login">
-        <form action="loginScript.php" method="post">
+        <form action="registerHandler.php" method="post">
                 <input class="center" type="email" name="email" placeholder="Email" required>
+                <br>
+                <input class="center" type="text" name="username" placeholder="Username" required>
                 <br>
                 <input class="center" type="password" name="password" placeholder="Password" required>
                 <br>
-                <input class="center" type="submit" value="Login">
+                <input class="center" type="submit" value="Register">
             </form>
         </div>
         <br>
-        <a href="register.php">Register</a>
+        <div class="center" id="passwordnote">
+            <p>For security reasons, passwords must meet the following requirements:
+            <br>
+            <ul>
+                <li>Must be at least 8 characters long</li>
+                <li>Must contain at least one letter</li>
+                <li>Must contain at least one number</li>
+            </ul>
+            </p>
+        </div>
+        <br>
+        <a href="login.php">login</a>
     </body>
 </html>
