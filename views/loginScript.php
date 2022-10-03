@@ -7,23 +7,32 @@ if ((isset($_POST["email"]) && isset($_POST["password"])) && !(empty($_POST["ema
         $query->bindValue(1, $_POST["email"]);  
         $result = $query->execute();
         $result = $result->fetchArray();
-        $db->close();
-        unset($db);
         if (password_verify($_POST['password'], $result[0])) {
             echo "Login successful!";
             session_start();
+            $db->close();
+            unset($db);
             $db = new SQLite3('../user.db'); // Connect to database
             $db->busyTimeout(1000);
             $query = $db->prepare("UPDATE users SET SessionID=? WHERE Email=?");
             $query->bindValue(1, session_id());
-            $query->bindValue(2, $_POST["email"]);  
+            $query->bindValue(2, $_POST["email"]);
             $result = $query->execute();
-            $result = $result->fetchArray();
             $db->close();
             unset($db);
-            header("Location: index.php");
+            $db = new SQLite3('../user.db'); // Connect to database
+            $db->busyTimeout(1000);
+            $query = $db->prepare("SELECT Username FROM users WHERE Email=?");
+            $query->bindValue(1, $_POST["email"]);
+            $result = $query->execute();
+            $_SESSION["name"] = $result->fetchArray()[0];
+            $db->close();
+            unset($db);
+            header("Location: dash.php");
         } else {
             echo "Login failed. Please try again.";
+            $db->close();
+            unset($db);
         }
     }
     catch (PDOException $e) {

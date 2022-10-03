@@ -1,3 +1,20 @@
+<?php
+    session_start();
+    $db = new SQLite3('../user.db'); // Connect to database
+    $db->busyTimeout(1000);
+    $query = $db->prepare("SELECT UserID FROM users WHERE SessionID=?");
+    $query->bindValue(1, session_id());
+    $result = $query->execute();
+    $result = $result->fetchArray();
+    if ($result == null) {
+        header("Location: login.php");
+        echo "not logged in";
+        return;
+    }
+    $db->close();
+    unset($db);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,7 +50,7 @@
                 width: 15vw;
                 background-color: #fff;
                 padding: 1vw;
-                height: 14vh;
+                height: 10vh;
                 padding-top: 3vh;
                 padding-bottom: 3vh;
                 align-items: center;
@@ -61,13 +78,6 @@
                 margin: 1vw;
                 display: flex;
             }
-            #passwordnote {
-                width: 15vw;
-                background-color: #fff;
-                padding: 1vw;
-                align-items: center;
-                border-radius: 25px;
-            }
         </style>
     </head>
     <body>
@@ -84,29 +94,6 @@
             <a class="navopts" href="Search.php">Search</a>
         </div>
         <br>
-        <div class="center" id="login">
-        <form action="registerHandler.php" method="post">
-                <input class="center" type="email" name="email" placeholder="Email" required>
-                <br>
-                <input class="center" type="text" name="username" placeholder="Username" required>
-                <br>
-                <input class="center" type="password" name="password" placeholder="Password" required>
-                <br>
-                <input class="center" type="submit" value="Register">
-            </form>
-        </div>
-        <br>
-        <div class="center" id="passwordnote">
-            <p>For security reasons, passwords must meet the following requirements:
-            <br>
-            <ul>
-                <li>Must be at least 8 characters long</li>
-                <li>Must contain at least one letter</li>
-                <li>Must contain at least one number</li>
-            </ul>
-            </p>
-        </div>
-        <br>
-        <a href="login.php">login</a>
+        Hello <?php echo $_SESSION['name']; ?>!
     </body>
 </html>

@@ -73,7 +73,7 @@
             <br>
             <a class="navopts" href="index.php">Home</a>
             <a class="navopts" href="about.php">About</a>
-            <a class="navopts" href="Account.php">Account</a>
+            <a class="navopts" href="dash.php">Account</a>
             <a class="navopts" href="Search.php">Search</a>
         </div>
         <br>
