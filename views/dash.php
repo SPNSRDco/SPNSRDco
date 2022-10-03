@@ -155,5 +155,6 @@
             Hello <?php echo $_SESSION['name']; ?>!
             <br>
             <a href="logout.php">Logout</a>
+            <a href="terminate.php">Delete Account</a>
     </body>
 </html>
